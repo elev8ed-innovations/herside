@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand colors */
+  --color-her:    #C96B84;
+  --color-her2:   #A84F68;
+  --color-him:    #5085B0;
+  --color-train:  #6AA882;
+  --color-iron:   #C8943A;
+  --color-peri:   #8B68C0;
+  --color-dutch:  #7055B8;
+  --color-ok:     #5BAA78;
+  --color-warn:   #D09040;
+  --color-bad:    #D05555;
+
+  /* Backgrounds */
+  --color-bg:  #080509;
+  --color-s1:  #100D15;
+  --color-s2:  #181320;
+  --color-s3:  #201B2C;
+  --color-s4:  #282538;
+
+  /* Text */
+  --color-t1:  #F0E8EC;
+  --color-t2:  rgba(240,232,236,0.52);
+  --color-t3:  rgba(240,232,236,0.22);
+  --color-dim: rgba(240,232,236,0.09);
+
+  /* Phase colors */
+  --color-ph-m: #C96B84;
+  --color-ph-f: #6AA882;
+  --color-ph-o: #C8943A;
+  --color-ph-l: #8B68C0;
+
+  /* Typography */
+  --font-display: var(--font-playfair);
+  --font-body:    var(--font-dm-sans);
+
+  /* Border radius */
+  --radius-card: 20px;
+  --radius-tile: 14px;
+  --radius-pill: 50px;
+}
+
+/* Raw CSS custom props for use in inline styles */
+:root {
+  --her:    #C96B84;
+  --her2:   #A84F68;
+  --him:    #5085B0;
+  --train:  #6AA882;
+  --iron:   #C8943A;
+  --peri:   #8B68C0;
+  --bg:     #080509;
+  --s1:     #100D15;
+  --s2:     #181320;
+  --s3:     #201B2C;
+  --s4:     #282538;
+  --t1:     #F0E8EC;
+  --t2:     rgba(240,232,236,0.52);
+  --t3:     rgba(240,232,236,0.22);
+  --dim:    rgba(240,232,236,0.09);
+}
+
+html {
+  background-color: #080509;
+  color: #F0E8EC;
+}
+
+body {
+  font-family: var(--font-dm-sans, 'DM Sans', sans-serif);
+  background-color: #080509;
+  color: #F0E8EC;
+}
+
+.btn-ghost {
+  border: 1px solid var(--dim);
+  color: var(--t2);
+  transition: border-color 300ms ease, color 300ms ease;
+}
+.btn-ghost:hover {
+  border-color: var(--her);
+  color: var(--t1);
+}
+
+.btn-primary {
+  background: var(--her);
+  color: #fff;
+  transition: opacity 300ms ease;
+}
+.btn-primary:hover {
+  opacity: 0.88;
+}
