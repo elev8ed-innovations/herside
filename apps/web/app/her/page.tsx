@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import {
   calculateCurrentPhase,
   getNextTransition,
@@ -8,8 +9,11 @@ import { PhaseRing } from '../components/her/PhaseRing';
 import { CycleCalendar } from '../components/her/CycleCalendar';
 import { CheckIn } from '../components/her/CheckIn';
 import { AIBubble } from '../components/her/AIBubble';
+import { DailyInsight } from '../components/her/DailyInsight';
 import { IronMindStrip } from '../components/her/IronMindStrip';
 import { PatternCard } from '../components/her/PatternCard';
+
+export const dynamic = 'force-dynamic';
 
 // Demo anchor: today is always Day 14 (ovulation) for the mock
 function getMockLastPeriodStart() {
@@ -94,12 +98,16 @@ export default function HerTodayPage() {
         </div>
       </Section>
 
-      {/* AI insight */}
+      {/* AI insight — async server component, streams from Claude */}
       <Section>
-        <AIBubble
-          phaseColor={phaseColor}
-          insight={`You're in **${desc.name}** — ${desc.description} **Energy peaks now.** Use this window for high-intensity training, bold conversations, and ambitious goals. Your body is primed.`}
-        />
+        <Suspense fallback={<AIBubble insight="" phaseColor={phaseColor} isLoading />}>
+          <DailyInsight
+            phase={phase}
+            cycleDay={cycleDay}
+            cycleLength={CYCLE_LENGTH}
+            phaseColor={phaseColor}
+          />
+        </Suspense>
       </Section>
 
       {/* IronMind GritScore */}
