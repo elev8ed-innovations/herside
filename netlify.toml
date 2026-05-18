@@ -47,6 +47,11 @@
 #   Shared secret for verifying IronMind webhook signatures
 #   Used by: supabase/functions/ironmind-webhook/index.ts
 #
+# REVENUECAT_WEBHOOK_SECRET
+#   Authorization string set in RevenueCat dashboard → Integrations → Webhooks
+#   Used by: supabase/functions/revenuecat-webhook/index.ts
+#   RevenueCat sends this in the Authorization header on every webhook event
+#
 # ---------------------------------------------------------------------------
 # Optional env vars
 # ---------------------------------------------------------------------------
