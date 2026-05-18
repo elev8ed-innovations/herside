@@ -1,7 +1,10 @@
-# /login and /onboarding don't have pages yet — both land on role select
-/login              /role-select/   302
-/onboarding         /role-select/   302
-/onboarding/*       /role-select/   302
+# /role-select is now the homepage
+/role-select        /               302
+
+# /login and /onboarding don't have pages yet — both land on home
+/login              /               302
+/onboarding         /               302
+/onboarding/*       /               302
 
 # Serve 404 page for any unmatched route
 /*                  /404.html       404
