@@ -30,8 +30,9 @@ function GritBar({ score, baseline }: { score: number; baseline: number }) {
   );
 }
 
-export default function ClientProfilePage({ params }: { params: { id: string } }) {
-  const client = MOCK_CLIENTS.find(c => c.id === params.id);
+export default async function ClientProfilePage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  const client = MOCK_CLIENTS.find(c => c.id === id);
   if (!client) notFound();
 
   const plan = SESSION_PLANS[client.phase];
