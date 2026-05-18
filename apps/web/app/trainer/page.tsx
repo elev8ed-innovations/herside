@@ -2,7 +2,6 @@ import { Suspense } from 'react';
 import { TrainerInsight, TrainerInsightSkeleton } from '../components/trainer/TrainerInsight';
 import { ClientDashboard } from '../components/trainer/ClientDashboard';
 
-export const dynamic = 'force-dynamic';
 
 const TRAIN = '#6AA882';
 

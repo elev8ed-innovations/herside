@@ -1,7 +1,6 @@
 import { calculateCurrentPhase, getNextTransition, getPhaseForDay, getPhaseColor, phaseDescriptions } from '@herside/shared';
 import type { Phase } from '@herside/shared';
 
-export const dynamic = 'force-dynamic';
 
 function getMockLastPeriodStart() {
   const d = new Date();

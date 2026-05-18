@@ -11,7 +11,6 @@ import { BreathingTool } from '../../components/her/mirror/BreathingTool';
 import { CommunicationScript } from '../../components/her/mirror/CommunicationScript';
 import { ReflectionChecklist } from '../../components/her/mirror/ReflectionChecklist';
 
-export const dynamic = 'force-dynamic';
 
 function getMockLastPeriodStart() {
   const d = new Date();

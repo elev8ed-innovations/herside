@@ -1,8 +1,6 @@
 'use client';
 
-import { useState, useTransition } from 'react';
-import { updatePermission } from '../../../actions/privacy';
-import { revokeConnection } from '../../../actions/invite';
+import { useState } from 'react';
 
 export type ConnectionType = 'partner' | 'trainer' | 'ironmind' | 'friend';
 
@@ -39,31 +37,14 @@ export function ConnectionCard({ connection }: { connection: ConnectionCardData 
   const color = TYPE_COLOR[connection.connectionType];
   const [permissions, setPermissions] = useState(connection.permissions);
   const [revokeStage, setRevokeStage] = useState<'idle' | 'confirm' | 'done'>('idle');
-  const [, startTransition] = useTransition();
 
   const handleToggle = (key: string, newVal: boolean) => {
-    // Optimistic update
-    setPermissions(prev =>
-      prev.map(p => p.key === key ? { ...p, enabled: newVal } : p),
-    );
-    startTransition(async () => {
-      try {
-        await updatePermission(connection.id, key, newVal);
-      } catch {
-        // Revert on error
-        setPermissions(prev =>
-          prev.map(p => p.key === key ? { ...p, enabled: !newVal } : p),
-        );
-      }
-    });
+    setPermissions(prev => prev.map(p => p.key === key ? { ...p, enabled: newVal } : p));
   };
 
-  const handleRevoke = async () => {
+  const handleRevoke = () => {
     if (revokeStage === 'idle') { setRevokeStage('confirm'); return; }
-    startTransition(async () => {
-      await revokeConnection(connection.id);
-      setRevokeStage('done');
-    });
+    setRevokeStage('done');
   };
 
   if (revokeStage === 'done') {

@@ -10,7 +10,6 @@ import { WeekPreview } from '../components/him/WeekPreview';
 import { CycleCalendar } from '../components/her/CycleCalendar';
 import { IronMindStrip } from '../components/her/IronMindStrip';
 
-export const dynamic = 'force-dynamic';
 
 function getMockLastPeriodStart() {
   const d = new Date();

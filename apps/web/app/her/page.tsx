@@ -13,7 +13,6 @@ import { DailyInsight } from '../components/her/DailyInsight';
 import { IronMindStrip } from '../components/her/IronMindStrip';
 import { PatternCard } from '../components/her/PatternCard';
 
-export const dynamic = 'force-dynamic';
 
 // Demo anchor: today is always Day 14 (ovulation) for the mock
 function getMockLastPeriodStart() {

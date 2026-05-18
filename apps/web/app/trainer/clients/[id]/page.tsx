@@ -3,6 +3,10 @@ import { MOCK_CLIENTS, SESSION_PLANS } from '../../../components/trainer/mockCli
 import { getPhaseForDay, getPhaseColor, phaseDescriptions } from '@herside/shared';
 import type { Phase } from '@herside/shared';
 
+export function generateStaticParams() {
+  return MOCK_CLIENTS.map(c => ({ id: c.id }));
+}
+
 const TRAIN = '#6AA882';
 
 const PHASE_ORDER: Phase[] = ['menstrual', 'follicular', 'ovulation', 'luteal'];

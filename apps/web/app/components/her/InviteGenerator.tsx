@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { createInvite, type ConnectionType } from '../../actions/invite';
+
+type ConnectionType = 'partner' | 'trainer' | 'ironmind' | 'friend';
 
 const CONNECTION_TYPES: Array<{
   type: ConnectionType;
@@ -28,16 +29,15 @@ export function InviteGenerator({ herUserId, phaseColor }: InviteGeneratorProps)
   const [inviteUrl, setInviteUrl] = useState('');
   const [copied, setCopied] = useState(false);
 
-  const handleGenerate = async () => {
+  const handleGenerate = () => {
     if (!selected) return;
     setStep('generating');
-    try {
-      const result = await createInvite(herUserId, selected);
-      setInviteUrl(result.inviteUrl);
+    setTimeout(() => {
+      const token = Math.random().toString(36).slice(2, 10);
+      const base = typeof window !== 'undefined' ? window.location.origin : 'https://herside.netlify.app';
+      setInviteUrl(`${base}/invite/${token}`);
       setStep('done');
-    } catch {
-      setStep('error');
-    }
+    }, 600);
   };
 
   const handleCopy = async () => {

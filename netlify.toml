@@ -1,10 +1,7 @@
 [build]
   base    = "apps/web"
   command = "npm install && npm run build"
-  publish = ".next"
-
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+  publish = "out"
 
 # Invite link redirect — deep-links from email/SMS into the accept flow.
 # The Next.js page lives at /invite/[token]; this lets both URL forms work.

@@ -2,6 +2,9 @@ import { notFound } from 'next/navigation';
 import { getInviteByToken, type ConnectionType } from '../../actions/invite';
 import { AcceptInvite } from './AcceptInvite';
 
+export function generateStaticParams() { return []; }
+export const dynamicParams = false;
+
 interface PageProps {
   params: Promise<{ token: string }>;
 }

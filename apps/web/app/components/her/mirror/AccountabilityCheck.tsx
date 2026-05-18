@@ -1,8 +1,13 @@
 'use client';
 
-import { useState, useTransition } from 'react';
-import { getAccountabilityResponse } from '../../../actions/accountability';
+import { useState } from 'react';
 import type { Phase } from '@herside/shared';
+
+const LOCAL_RESPONSES: Record<'yes' | 'somewhat' | 'not_really', string> = {
+  yes:        'That awareness is the practice. Each time you choose it, it gets easier.',
+  somewhat:   'Partial is still progress. Notice where the gap was — that\'s the data.',
+  not_really: 'This is information, not verdict. Tomorrow is a new window.',
+};
 
 const QUESTIONS = [
   { id: 'communicated_needs', text: 'Did you communicate what you actually needed today?' },
@@ -33,29 +38,17 @@ export function AccountabilityCheck({ phase, cycleDay, phaseColor }: Accountabil
   const [states, setStates] = useState<Record<string, QuestionState>>(
     Object.fromEntries(QUESTIONS.map(q => [q.id, { selected: null, response: '', loading: false }])),
   );
-  const [, startTransition] = useTransition();
-
   const handleSelect = (
     questionId: string,
-    question: string,
+    _question: string,
     answerType: 'yes' | 'somewhat' | 'not_really',
-    answerLabel: string,
+    _answerLabel: string,
   ) => {
-    // Already selected this answer
     if (states[questionId].selected === answerType) return;
-
     setStates(prev => ({
       ...prev,
-      [questionId]: { selected: answerType, response: '', loading: true },
+      [questionId]: { selected: answerType, response: LOCAL_RESPONSES[answerType], loading: false },
     }));
-
-    startTransition(async () => {
-      const response = await getAccountabilityResponse(question, answerType, answerLabel, phase, cycleDay);
-      setStates(prev => ({
-        ...prev,
-        [questionId]: { selected: answerType, response, loading: false },
-      }));
-    });
   };
 
   return (
