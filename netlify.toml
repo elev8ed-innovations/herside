@@ -2,3 +2,56 @@
   base    = "apps/web"
   command = "npm install && npm run build"
   publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Invite link redirect — deep-links from email/SMS into the accept flow.
+# The Next.js page lives at /invite/[token]; this lets both URL forms work.
+[[redirects]]
+  from   = "/onboarding/accept/:token"
+  to     = "/invite/:token"
+  status = 200
+
+# Environment variables — set real values in the Netlify dashboard
+# (Never commit real keys to this file)
+[build.environment]
+  NEXT_TELEMETRY_DISABLED = "1"
+  NODE_VERSION            = "20"
+
+# ---------------------------------------------------------------------------
+# Required env vars — set these in Netlify UI → Site → Environment variables
+# ---------------------------------------------------------------------------
+#
+# ANTHROPIC_API_KEY
+#   Your Anthropic API key from console.anthropic.com
+#   Used by: apps/web/lib/claude.ts (server-side only, never in client bundle)
+#   Needed for: Daily Insight, Trainer Roster Brief, Partner Brief, Mirror AI
+#
+# SUPABASE_URL
+#   Your Supabase project URL: https://<project-ref>.supabase.co
+#   Used by: apps/web/lib/supabase.ts (server-side REST client)
+#
+# SUPABASE_SERVICE_ROLE_KEY
+#   Your Supabase service role key (secret) — bypasses RLS for server actions
+#   Used by: apps/web/lib/supabase.ts
+#   WARNING: never expose this to the client bundle
+#
+# NEXT_PUBLIC_SUPABASE_URL
+#   Same value as SUPABASE_URL — exposed to client for Supabase Auth JS
+#
+# NEXT_PUBLIC_SUPABASE_ANON_KEY
+#   Your Supabase anon/public key — safe to expose, RLS enforces access
+#
+# IRONMIND_WEBHOOK_SECRET
+#   Shared secret for verifying IronMind webhook signatures
+#   Used by: supabase/functions/ironmind-webhook/index.ts
+#
+# ---------------------------------------------------------------------------
+# Optional env vars
+# ---------------------------------------------------------------------------
+#
+# NEXT_PUBLIC_APP_URL
+#   The canonical URL of this deployment (e.g. https://herside.netlify.app)
+#   Used to construct invite share links in InviteGenerator.tsx
+#
